@@ -8,14 +8,12 @@ import Button from "@mui/material/Button";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import { useNavigate } from "react-router-dom";
 
-const pages = [
-  { name: "Bots", location: "/bots" },
-  { name: "Deals", location: "/deals" },
-];
-
-function ResponsiveNavBar() {
+export default function Navbar() {
+  const pages = [
+    { name: "Bots", location: "/bots" },
+    { name: "Deals", location: "/deals" },
+  ];
   const navigate = useNavigate();
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -54,4 +52,3 @@ function ResponsiveNavBar() {
     </AppBar>
   );
 }
-export default ResponsiveNavBar;

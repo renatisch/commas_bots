@@ -1,19 +1,14 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import BotItem from "../BotItem";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import BotItem from "../BotItem/BotItem";
 
 export default function Bots() {
-  const baseURL = "http://127.0.0.1:8000/bots";
-  const [botsData, setBotsData] = useState();
-
   const bots = [
     {
       name: "SOL/USDT long",
       strategy: "DCA Long Strategy",
-      baseOrderVolume: "80",
-      safetyOrderVolume: "160",
+      baseOrderVolume: 80,
+      safetyOrderVolume: 160,
       targetProfit: 1,
       numberSafetyOrders: 15,
       safetyOrderStepScale: 1.5,
@@ -22,8 +17,8 @@ export default function Bots() {
     {
       name: "PEPE/USDT long",
       strategy: "DCA Long Strategy",
-      baseOrderVolume: "80",
-      safetyOrderVolume: "160",
+      baseOrderVolume: 80,
+      safetyOrderVolume: 160,
       targetProfit: 1,
       numberSafetyOrders: 15,
       safetyOrderStepScale: 1.5,
@@ -32,8 +27,8 @@ export default function Bots() {
     {
       name: "JUP/USDT long",
       strategy: "DCA Long Strategy",
-      baseOrderVolume: "80",
-      safetyOrderVolume: "160",
+      baseOrderVolume: 80,
+      safetyOrderVolume: 160,
       targetProfit: 1,
       numberSafetyOrders: 15,
       safetyOrderStepScale: 1.5,
@@ -42,21 +37,14 @@ export default function Bots() {
     {
       name: "BONK/USDT long",
       strategy: "DCA Long Strategy",
-      baseOrderVolume: "80",
-      safetyOrderVolume: "160",
+      baseOrderVolume: 80,
+      safetyOrderVolume: 160,
       targetProfit: 1,
       numberSafetyOrders: 15,
       safetyOrderStepScale: 1.5,
       safetyOrderVolumeScale: 1.12,
     },
   ];
-  useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setBotsData(response.data.bots);
-    });
-  }, []);
-
-  console.log(botsData);
 
   return (
     <Grid container spacing={0} alignItems="center" justifyContent="center">

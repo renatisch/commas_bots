@@ -1,9 +1,5 @@
 import React from "react";
 
 export default function Deals() {
-  return (
-    <div>
-      <h2>Deals</h2>
-    </div>
-  );
+  return <h2>This is deals page</h2>;
 }
