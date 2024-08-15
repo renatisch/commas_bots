@@ -4,8 +4,10 @@ from models import Bots
 
 
 def fetch_bots():
-    api_key = os.getenv("API_KEY")
-    secret = os.getenv("API_SECRET")
+    # api_key = os.getenv("API_KEY")
+    # secret = os.getenv("API_SECRET")
+    api_key = os.getenv("HOME_API_KEY")
+    secret = os.getenv("HOME_API_SECRET")
     base_endpoint = "https://api.3commas.io"
     endpoint = "/public/api/ver1/bots"
     url = base_endpoint + endpoint
