@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from bots import fetch_bots
+from bots import fetch_bots, update_bot
+from models import BotUpdateModel
 
 load_dotenv()
 
@@ -28,6 +29,12 @@ def root():
 
 
 @app.get("/bots")
-def get_bots():
+def bots_get():
     bots = fetch_bots()
     return bots
+
+
+@app.patch("/bots/update", status_code=200)
+def bot_update(bot: BotUpdateModel):
+    update_bot(bot=bot)
+    return {"message": "success"}
