@@ -6,12 +6,12 @@ import hmac, hashlib
 
 
 def fetch_bots():
-    api_key = os.getenv("API_KEY")
-    secret = os.getenv("API_SECRET")
+    # api_key = os.getenv("API_KEY")
+    # secret = os.getenv("API_SECRET")
     # api_key = os.getenv("HOME_API_KEY")
     # secret = os.getenv("HOME_API_SECRET")
-    # api_key = os.getenv("OFFICE_API_KEY")
-    # secret = os.getenv("OFFICE_API_SECRET")
+    api_key = os.getenv("OFFICE_API_KEY")
+    secret = os.getenv("OFFICE_API_SECRET")
     base_endpoint = "https://api.3commas.io"
     endpoint = "/public/api/ver1/bots"
     url = base_endpoint + endpoint
@@ -25,13 +25,14 @@ def fetch_bots():
 
 
 def update_bot(bot: BotUpdateModel):
+    print(bot.target_profit)
     bot_to_update = CommasBotModel(
         bot_id=bot.bot_id,
         name=bot.name,
         pairs=bot.pairs,
         base_order_volume=bot.base_order_volume,
         safety_order_volume=bot.safety_order_volume,
-        max_safety_orders=bot.active_safety_orders_count,
+        max_safety_orders=bot.so_count,
         safety_order_step_percentage=bot.deviation,
         take_profit=bot.target_profit,
         take_profit_type="total",
@@ -44,12 +45,12 @@ def update_bot(bot: BotUpdateModel):
     base_endpoint = "https://api.3commas.io"
     endpoint = f"/public/api/ver1/bots/{bot.bot_id}/update"
     url = base_endpoint + endpoint
-    api_key = os.getenv("API_KEY")
-    secret = os.getenv("API_SECRET")
+    # api_key = os.getenv("API_KEY")
+    # secret = os.getenv("API_SECRET")
     # api_key = os.getenv("HOME_API_KEY")
     # secret = os.getenv("HOME_API_SECRET")
-    # api_key = os.getenv("OFFICE_API_KEY")
-    # secret = os.getenv("OFFICE_API_SECRET")
+    api_key = os.getenv("OFFICE_API_KEY")
+    secret = os.getenv("OFFICE_API_SECRET")
     signature = generate_signature(
         endpoint=endpoint, secret=secret, data=json.dumps(bot_to_update.model_dump())
     )
@@ -58,4 +59,4 @@ def update_bot(bot: BotUpdateModel):
         "Signature": signature,
     }
     rq = requests.patch(url=url, headers=headers, json=bot_to_update.model_dump())
-    print(rq.content)
+    # print(rq.content)

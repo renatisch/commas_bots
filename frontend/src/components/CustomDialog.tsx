@@ -87,7 +87,6 @@ export default function CustomDialog({
   const [soStepScaleError, setSoStepScaleError] = useState(false);
   const [soVolumeScaleError, setSoVolumeScaleError] = useState(false);
 
-  console.log("price deviation", priceDeviation);
   useEffect(() => {}, [soCount, isBotUpdated]);
   const resetDefaults = () => {
     setBoVolume(baseOrderVolume.toString());
@@ -210,7 +209,6 @@ export default function CustomDialog({
     setIsDialogOpen(false);
     resetDefaults();
   };
-
   const handleSubmit = () => {
     setIsLoading(true);
     let endpoint = "http://127.0.0.1:8000/bots/update";
@@ -222,12 +220,13 @@ export default function CustomDialog({
       safety_order_volume: soVolume,
       so_count: soCount,
       deviation: priceDeviation,
-      target_profit: targetProfit,
+      target_profit: targetProfitPercentage,
       active_safety_orders_count: activeSOCount,
       so_step_coefficient: soStepScale,
       so_volume_coefficient: soVolumeScale,
       cooldown: botCooldown,
     };
+
     axios({
       method: "patch",
       url: endpoint,
@@ -244,7 +243,6 @@ export default function CustomDialog({
             setIsBotUpdated(true);
             setTimeout(() => {
               setIsDialogOpen(false);
-              resetDefaults();
               setTimeout(() => {
                 setIsBotUpdated(false);
                 fetchBotsAPI({ setBots: setBotItems });

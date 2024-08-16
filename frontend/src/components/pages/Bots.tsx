@@ -37,8 +37,6 @@ export default function Bots() {
     fetchBotsAPI({ setBots: setBotItems });
   }, []);
 
-  console.log("rendered");
-
   return (
     <Grid container spacing={0} justifyContent="start">
       {botItems.map((bot) => {
