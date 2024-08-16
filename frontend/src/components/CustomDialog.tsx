@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { Slider, Box, Grid, Typography, Alert } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
+import fetchBotsAPI from "../apiCalls";
 
 type CustomDialogProps = {
   isDialogOpen: boolean;
@@ -29,6 +30,7 @@ type CustomDialogProps = {
   safetyOrderVolumeScale: number;
   safetyOrderStepScale: number;
   cooldown: number;
+  setBotItems: Function;
 };
 
 export default function CustomDialog({
@@ -46,6 +48,7 @@ export default function CustomDialog({
   safetyOrderVolumeScale,
   safetyOrderStepScale,
   cooldown,
+  setBotItems,
 }: CustomDialogProps) {
   // transition states
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -84,7 +87,8 @@ export default function CustomDialog({
   const [soStepScaleError, setSoStepScaleError] = useState(false);
   const [soVolumeScaleError, setSoVolumeScaleError] = useState(false);
 
-  useEffect(() => {}, [soCount]);
+  console.log("price deviation", priceDeviation);
+  useEffect(() => {}, [soCount, isBotUpdated]);
   const resetDefaults = () => {
     setBoVolume(baseOrderVolume.toString());
     setSoVolume(safetyOrderVolume.toString());
@@ -243,6 +247,7 @@ export default function CustomDialog({
               resetDefaults();
               setTimeout(() => {
                 setIsBotUpdated(false);
+                fetchBotsAPI({ setBots: setBotItems });
               }, 1000);
             }, 2000);
           }, 2000);

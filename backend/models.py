@@ -58,9 +58,9 @@ class CommasBotModel(BaseModel):
     safety_order_volume: int
     max_safety_orders: int
     safety_order_step_percentage: float
-    target_profit: int
+    take_profit: int
     take_profit_type: str
-    strategy_list: list[StrategyModel]
+    strategy_list: List[StrategyModel]
     active_safety_orders_count: int
     martingale_step_coefficient: float
     martingale_volume_coefficient: float

@@ -4,9 +4,9 @@ import BotItem from "../BotItem/BotItem";
 import axios from "axios";
 import { BotItemApiModel } from "./models";
 import { useState, useEffect } from "react";
+import fetchBotsAPI from "../../apiCalls";
 
 export default function Bots() {
-  const botsEndpoint = "http://127.0.0.1:8000/bots";
   const [botItems, setBotItems] = useState<[BotItemApiModel]>([
     {
       id: 0,
@@ -34,14 +34,11 @@ export default function Bots() {
   ]);
 
   useEffect(() => {
-    axios.get(botsEndpoint).then((response) => {
-      if (response.status === 200) {
-        setBotItems(response.data.bots);
-      }
-    });
+    fetchBotsAPI({ setBots: setBotItems });
   }, []);
 
-  console.log(botItems);
+  console.log("rendered");
+
   return (
     <Grid container spacing={0} justifyContent="start">
       {botItems.map((bot) => {
@@ -76,6 +73,7 @@ export default function Bots() {
                 finishedDealsProfit={bot.finished_deals_profit_usd}
                 activeDealsProfit={bot.active_deals_usd_profit}
                 isEnabled={bot.is_enabled}
+                setBotItems={setBotItems}
               />
             </Grid>
           );

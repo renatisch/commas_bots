@@ -23,6 +23,7 @@ type BotItemProps = {
   finishedDealsProfit: number;
   activeDealsProfit: number;
   isEnabled: boolean;
+  setBotItems: Function;
 };
 
 type ToolTipProps = {
@@ -166,6 +167,7 @@ export default function BotItem({
   finishedDealsProfit,
   activeDealsProfit,
   isEnabled,
+  setBotItems,
 }: BotItemProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -344,6 +346,7 @@ export default function BotItem({
           safetyOrderVolumeScale={safetyOrderVolumeScale}
           safetyOrderStepScale={safetyOrderStepScale}
           cooldown={cooldown}
+          setBotItems={setBotItems}
         />
       </Grid>
     </Box>
